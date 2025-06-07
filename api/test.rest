@@ -3,3 +3,12 @@
 ###
 
 GET {{server}}/version
+
+###
+
+POST {{server}}/t/forgot-password
+Content-Type: application/json
+
+{
+  "email": "syosifov@gmail.com"
+}

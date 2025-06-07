@@ -13,4 +13,6 @@ func RegisterTestRoutes(r *gin.Engine) {
 	g.GET("/hello", controllers.Hello)
 	g.GET("/vars", controllers.VarsTest)
 
+	g.POST("/forgot-password", controllers.ForgotPassword)
+
 }
