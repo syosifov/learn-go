@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// initialize()
+	initialize()
 
 	// gin.SetMode(gin.DebugMode)
 	gin.SetMode(gin.ReleaseMode)
@@ -17,8 +17,8 @@ func main() {
 	r := gin.Default()
 
 	// Initialize the CORS
-	// initCors(r)
-	// registerRoutes(r)
+	initCors(r)
+	registerRoutes(r)
 
 	r.GET("/version", func(c *gin.Context) {
 		c.JSON(200, gin.H{
