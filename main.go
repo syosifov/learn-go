@@ -3,6 +3,7 @@ package main
 import (
 	"cmp"
 	"log"
+	"main/telegram"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -30,6 +31,6 @@ func main() {
 	// logger.Info("Server starting", slog.String("port", port))
 	log.Printf("Server starting at port %s \n", port)
 
-	// go telegram.RunTelegram()
+	go telegram.RunTelegram()
 	r.Run((":" + port))
 }

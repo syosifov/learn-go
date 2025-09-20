@@ -9,4 +9,7 @@ go get gorm.io/gorm
 ---------------------------------------
 go get gopkg.in/mail.v2
 
+https://go-telegram-bot-api.dev/getting-started/
+go get -u github.com/go-telegram-bot-api/telegram-bot-api/v5
+
 

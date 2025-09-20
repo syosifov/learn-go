@@ -12,3 +12,22 @@ Content-Type: application/json
 {
   "email": "syosifov@gmail.com"
 }
+###
+POST {{server}}/t/message
+Content-Type: application/json
+
+{
+  "chat_id": 5304298031,
+  "text": "Hello, Str!",
+  "first_name": "59639"
+}
+
+###
+POST {{server}}/t/message
+Content-Type: application/json
+
+{
+  "chat_id": 7972105531,
+  "text": "Hello, Dark Shark!",
+  "first_name": "Miro"
+}

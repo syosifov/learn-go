@@ -15,4 +15,6 @@ func RegisterTestRoutes(r *gin.Engine) {
 
 	g.POST("/forgot-password", controllers.ForgotPassword)
 
+	g.POST("/message", controllers.TSendMessage)
+
 }
