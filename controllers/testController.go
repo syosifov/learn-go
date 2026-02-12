@@ -58,11 +58,12 @@ func TSendMessage(c *gin.Context) {
 	// For demonstration purposes, we'll just log the message.
 	log.Printf("Sending message to chat_id %d: %s", reqBody.ChatID, reqBody.Text)
 
-	for i := 0; i < 3; i++ {
-		tlg.SendMessage(reqBody.ChatID, reqBody.Text)
+	for i := range 3 {
 		if i == 2 {
+			tlg.SendMessage(reqBody.ChatID, reqBody.Text)
 			break
 		}
+		tlg.SendMessage(reqBody.ChatID, ".")
 		time.Sleep(1 * time.Second)
 	}
 	c.JSON(200, gin.H{"status": "Message sent"})
