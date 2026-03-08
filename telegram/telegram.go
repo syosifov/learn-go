@@ -37,7 +37,7 @@ func RunTelegram() {
 		if update.Message == nil {
 			continue
 		}
-		if !update.Message.IsCommand() { // ignore any non-command Messages
+		if !update.Message.IsCommand() {
 			msg, err := SendMessage(update.Message.Chat.ID, "You said: "+update.Message.Text)
 			if err != nil {
 				log.Printf("Error sending echo message: %v", err)
@@ -46,11 +46,8 @@ func RunTelegram() {
 			continue
 		}
 
-		// Create a new MessageConfig. We don't have text yet,
-		// so we leave it empty.
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 
-		// Extract the command from the Message.
 		switch update.Message.Command() {
 		case "start":
 			msg.Text = "Welcome!"
@@ -60,19 +57,14 @@ func RunTelegram() {
 			msg.Text = "Hi :)"
 		case "status":
 			msg.Text = "I'm ok."
-
 		default:
 			msg.Text = "I don't know that command"
 		}
 
-		// msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
 		msg.ReplyToMessageID = update.Message.MessageID
 		if _, err := bot.Send(msg); err != nil {
-			// TODO
-			// Note that panics are a bad way to handle errors. Telegram can
-			// have service outages or network errors, you should retry sending
-			// messages or more gracefully handle failures.
-			panic(err)
+			log.Printf("Error sending command response: %v", err)
+			continue
 		}
 	}
 }
