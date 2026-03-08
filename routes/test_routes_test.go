@@ -5,6 +5,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"encoding/json"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +15,7 @@ func setupRouter() *gin.Engine {
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong")
 	})
+	RegisterTestRoutes(router)
 	return router
 }
 
@@ -37,5 +40,25 @@ func TestPingRoute(t *testing.T) {
 	}
 	if w.Body.String() != "pong" {
 		t.Errorf("Expected 'pong', got %s", w.Body.String())
+	}
+}
+
+func TestHelloRoute(t *testing.T) {
+	router := setupRouter()
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/t/hello", nil)
+
+	router.ServeHTTP(w, req)
+
+	if w.Code != 200 {
+		t.Errorf("Expected 200, got %d", w.Code)
+	}
+
+	var response map[string]string
+	if err := json.Unmarshal(w.Body.Bytes(), &response); err != nil {
+		t.Fatalf("Failed to parse JSON response: %v", err)
+	}
+	if response["message"] != "Hello Gin!" {
+		t.Errorf("Expected message 'Hello Gin!', got %s", response["message"])
 	}
 }
